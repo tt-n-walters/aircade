@@ -1,5 +1,6 @@
 import arcade
 import os
+import random
 rootdir = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -12,11 +13,16 @@ class GameWindow(arcade.Window):
         Player.texture.image = Player.texture.image.rotate(-90)
 
         self.player = Player(self.width / 2, self.height / 2)
+        self.food = Food()
+        self.food.set_random_position(self.width, self.height)
+
         self.pressed_keys = set()
+        self.score = 0
 
     def on_draw(self):
         arcade.start_render()
         self.player.draw()
+        self.food.draw()
 
     def on_key_press(self, symbol, modifiers):
         self.pressed_keys.add(symbol)
@@ -27,6 +33,10 @@ class GameWindow(arcade.Window):
     def on_update(self, delta_time):
         self.player.update(self.pressed_keys)
         self.player.wrap_screen(self.width, self.height)
+        if (self.player.collides_with_sprite(self.food)):
+            self.food.set_random_position(self.width, self.height)
+            self.score += 1
+            print("Score:", self.score)
 
 
 class Player(arcade.Sprite):
@@ -63,6 +73,17 @@ class Player(arcade.Sprite):
             self.top = 0
         elif self.top < 0:
             self.bottom = s_height
+
+
+
+class Food(arcade.Sprite):
+    def __init__(self):
+        super().__init__(os.path.join(rootdir, "food.png"))
+
+    def set_random_position(self, window_width, window_height):
+        margin = 32
+        self.center_x = random.randint(margin, window_width-margin)
+        self.center_y = random.randint(margin, window_height-margin)
 
 
 GameWindow()
