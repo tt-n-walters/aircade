@@ -27,7 +27,6 @@ class GameWindow(arcade.Window):
     def on_update(self, delta_time):
         self.player.update(self.pressed_keys)
         self.player.wrap_screen(self.width, self.height)
-        print(self.player.position)
 
 
 class Player(arcade.Sprite):
