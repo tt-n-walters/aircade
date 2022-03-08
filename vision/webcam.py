@@ -15,9 +15,9 @@ if video.isOpened():
         frame[:, :, 0] =  - frame[:, :, 0] + offset + frame[:, ::-1, 0]
         frame[:, :, 1] =  - frame[:, :, 1] + offset*2
         frame[:, :, 2] =  - frame[:, :, 2] + frame[::-1, :, 2]
-        offset += 1
 
-        img = Image.fromarray(frame).filter(ImageFilter.FIND_EDGES)
+        offset += 1
+        img = Image.fromarray(frame).filter(ImageFilter.CONTOUR)
         frame = np.array(img)
 
         cv2.imshow("Window", frame)
