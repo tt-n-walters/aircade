@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 arcade = "*"
 opencv-python = "*"
+opencv-contrib-python = "*"
 
 [dev-packages]
 autopep8 = "*"
