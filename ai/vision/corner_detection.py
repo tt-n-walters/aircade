@@ -1,7 +1,5 @@
-import win32gui as win
-from PIL import ImageGrab
 import cv2
-
+import numpy as np
 
 def detect(frame):
     bw = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -16,14 +14,9 @@ def detect(frame):
     frame[corners > threshold] = [255, 0, 255]
     return frame
 
-phandle = win.FindWindow(None, "Untitled - Notepad")
-win.SetForegroundWindow(phandle)
 
-sshot = ImageGrab.grab()
-# sshot.show()
-
-import numpy as np
-
-frame = detect(np.array(sshot))
-cv2.imshow("Frame", frame)
-cv2.waitKey(30000)
+if __name__ == "__main__":
+    image = cv2.imread("vision/map.png")
+    while not cv2.waitKey(0) == ord("q"):
+        cv2.imshow("Corners", detect(image))
+        

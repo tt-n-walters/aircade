@@ -6,11 +6,9 @@ rootdir = os.path.dirname(os.path.abspath(__file__))
 
 class GameWindow(arcade.Window):
     def __init__(self):
-        super().__init__(600, 400, "AIrcade")
+        super().__init__(900, 600, "AIrcade")
 
-        Player.texture = arcade.load_texture(
-            os.path.join(rootdir, "player.png"))
-        Player.texture.image = Player.texture.image.rotate(-90)
+        Player.texture = arcade.load_texture(os.path.join(rootdir, "player.png"), flipped_diagonally=True, flipped_horizontally=True)
 
         self.player = Player(self.width / 2, self.height / 2)
         self.food = Food()
@@ -25,9 +23,11 @@ class GameWindow(arcade.Window):
         self.food.draw()
 
     def on_key_press(self, symbol, modifiers):
+        print("pressed:", symbol)
         self.pressed_keys.add(symbol)
 
     def on_key_release(self, symbol, modifiers):
+        print("released:", symbol)
         self.pressed_keys.remove(symbol)
 
     def on_update(self, delta_time):
@@ -52,10 +52,10 @@ class Player(arcade.Sprite):
         self.change_angle = 0
 
         if arcade.key.UP in pressed_keys or arcade.key.W in pressed_keys:
-            self.forward(4)
+            self.forward(8)
 
         if arcade.key.DOWN in pressed_keys or arcade.key.S in pressed_keys:
-            self.reverse(2)
+            self.reverse(4)
 
         if arcade.key.LEFT in pressed_keys or arcade.key.A in pressed_keys:
             self.turn_left(4)
@@ -81,10 +81,15 @@ class Food(arcade.Sprite):
         super().__init__(os.path.join(rootdir, "food.png"))
 
     def set_random_position(self, window_width, window_height):
-        margin = 32
+        margin = self.width // 2
         self.center_x = random.randint(margin, window_width-margin)
         self.center_y = random.randint(margin, window_height-margin)
 
 
-GameWindow()
-arcade.run()
+def run_game():
+    GameWindow()
+    arcade.run()
+
+
+if __name__ == "__main__":
+    run_game()

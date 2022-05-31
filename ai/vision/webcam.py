@@ -6,6 +6,7 @@ import corner_detection
 
 
 def make_image_weird(frame):
+    global offset
     frame[:, :, 0] =  - frame[:, :, 0] + offset + frame[:, ::-1, 0]
     frame[:, :, 1] =  - frame[:, :, 1] + offset*2
     frame[:, :, 2] =  - frame[:, :, 2] + frame[::-1, :, 2]
@@ -25,6 +26,7 @@ if video.isOpened():
         ret_v, frame = video.read()
         
         frame = corner_detection.detect(frame)
+        make_image_weird(frame)
         
         cv2.imshow("Window", frame)
         if cv2.waitKey(1) == ord("q"):
