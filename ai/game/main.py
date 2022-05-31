@@ -78,7 +78,7 @@ class Player(arcade.Sprite):
 
 class Food(arcade.Sprite):
     def __init__(self):
-        super().__init__(os.path.join(rootdir, "food.png"))
+        super().__init__(os.path.join(rootdir, "circle.png"))
 
     def set_random_position(self, window_width, window_height):
         margin = self.width // 2

@@ -74,9 +74,9 @@ def search_game_window(title):
 
 if __name__ == "__main__":
     # start_game()
-    if handle := search_game_window():
-        take_screenshot(handle)
+    # if handle := search_game_window():
+    #     take_screenshot(handle)
 
-    handle = search_game_window()
+    handle = search_game_window("AIrcade")
     if handle:
         take_screenshot(handle)

@@ -2,7 +2,7 @@ import cv2
 from PIL import Image, ImageFilter
 import numpy as np
 
-import corner_detection
+from . import corner_detection
 
 
 def make_image_weird(frame):
