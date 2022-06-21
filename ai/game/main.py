@@ -24,6 +24,10 @@ class GameWindow(arcade.Window):
 
     def on_key_press(self, symbol, modifiers):
         print("pressed:", symbol)
+        if symbol == arcade.key.J:
+            self.player.angle -= 1
+        if symbol == arcade.key.K:
+            self.player.angle += 1
         self.pressed_keys.add(symbol)
 
     def on_key_release(self, symbol, modifiers):

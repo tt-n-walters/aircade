@@ -51,6 +51,10 @@ def take_screenshot(handle):
     image = Image.frombuffer("RGB", (width, height), image_data, "raw", "BGRX", 0, 1)
 
     image.save("ai/vision/map.png")
+    # CLear up memory
+    win32gui.DeleteObject(bitmap.GetHandle())
+    compatile_dc.DeleteDC()
+    device_context.DeleteDC()
     return np.array(image)
 
 

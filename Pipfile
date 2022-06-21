@@ -9,7 +9,7 @@ opencv-python = "*"
 opencv-contrib-python = "*"
 pywin32 = "*"
 
-[dev-packages]
+[dev-packages]                                                                
 autopep8 = "*"
 
 [requires]
